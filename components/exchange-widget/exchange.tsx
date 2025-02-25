@@ -1,17 +1,21 @@
 import classes from './exchange.module.css';
 
 function Exchange() {
+  const widgetHtml = `
+    <div style="width:198px;border:1px solid #1094A5;">
+      <div style="text-align:center;background-color:#1094A5;width:100%;font-size:13px;font-weight:bold;height:18px;padding-top:2px;">
+        <a href="https://www.exchangeratewidget.com/" style="color:#FFFFFF;text-decoration:none;" rel="nofollow">Currency Converter</a>
+      </div>
+      <script type="text/javascript" src="https://www.exchangeratewidget.com/converter.php?l=en&f=USD&t=EUR&a=1&d=CEDFDE&n=FFFFFF&o=000000&v=1"></script>
+    </div>
+  `;
   return (
     <div>
       <div className={classes.exchangeRates}>
-        <iframe
-          style={{ width: '250px', height: '241px' }}
-          frameBorder="0"
-          marginWidth={0}
-          marginHeight={0}
-          scrolling="no"
-          src="https://www.cursvalutar.ro/widget/?w=250&cft=114455&ctt=95A0B5&cc=000000&cfb=97b3bb&ct=060708&val=EUR,USD,GBP,HUF&font=12&logo=off&bold=bold&var=on&ct_b=bold&con=on&undefined=undefined"
-        ></iframe>
+        <div
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: widgetHtml }}
+        />
       </div>
     </div>
   );
