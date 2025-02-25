@@ -1,0 +1,16 @@
+/* Convertor */
+
+.exchangeRates {
+  opacity: 80%;
+}
+
+.exchangeRates iframe {
+  text-decoration: none;
+  color: black;
+}
+
+@media (max-width: 53rem) {
+  .exchangeRates {
+    display: none;
+  }
+}
