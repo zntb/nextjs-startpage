@@ -19,7 +19,7 @@ function Footer() {
               </li>
             ))}
 
-            <li className={classes.copright}>
+            <li className={classes.copyright}>
               &copy; 2016 -<span> {n}</span> zntb
             </li>
           </ul>

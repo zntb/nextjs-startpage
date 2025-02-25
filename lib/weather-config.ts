@@ -1,4 +1,4 @@
-export const CONFIG: StartmenuWeatherConfig = {
+export const CONFIG: WeatherConfig = {
   weatherIcons: '3d', // 'Onedark', 'Nord', 'Dark', 'White', '3d'
   weatherUnit: 'C', // 'F', 'C'
   trackLocation: true, // If false or an error occurs, the app will use the lat/lon below

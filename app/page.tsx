@@ -10,9 +10,25 @@ import classes from './page.module.css';
 
 import { getDropdownLinks } from '@/lib/actions';
 import { Category } from '@/lib/actions';
+import { DROPDOWN_CONTENT } from '@/lib/constants';
+import crypto from 'crypto';
 
-export default async function StartMenu() {
-  const categories: Category[] = await getDropdownLinks(); // Fetch data on the server side
+export default async function StartPage() {
+  let categories: Category[] = await getDropdownLinks(); // Fetch data from the database
+
+  // If no data is found, use local fallback data
+  if (categories.length === 0) {
+    categories = DROPDOWN_CONTENT.map(item => ({
+      id: crypto.randomUUID(),
+      name: item.category,
+      links: item.links.map(link => ({
+        id: crypto.randomUUID(),
+        title: link.title,
+        url: link.url,
+        order: 0,
+      })),
+    }));
+  }
 
   return (
     <>
