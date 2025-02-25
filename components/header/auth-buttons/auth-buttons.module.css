@@ -1,0 +1,16 @@
+.signupButton {
+  /* background: #d8d8d82d; */
+  color: white;
+  padding: 1rem 1.4rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+}
+
+@media (max-width: 48rem) {
+  .signupButton {
+    padding: 0;
+    background: none;
+  }
+}

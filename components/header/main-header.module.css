@@ -1,0 +1,145 @@
+.header {
+  align-items: center;
+  padding: 0 60px;
+  background-color: rgba(4, 27, 41, 0.5);
+}
+
+.header ul {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header li {
+  margin: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 1px;
+  width: 10rem;
+  padding: 0;
+  color: rgb(223, 224, 203);
+  border-radius: 3px;
+  background-color: rgba(220, 227, 142, 0);
+  transition: 0.3s ease-in-out;
+}
+
+.header li a {
+  text-align: center;
+  width: 100%;
+  padding: 1rem 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: inherit;
+  text-decoration: none;
+}
+
+.header li:hover {
+  background-color: rgba(89, 125, 179, 0.76);
+  color: rgb(220, 227, 142);
+}
+
+.nav {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.checkbox {
+  position: absolute;
+  font-size: 18px;
+  right: 0;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.checkbox:hover {
+  opacity: 1;
+}
+
+.checkmark {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #30cfd0;
+  border-radius: 5px;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.checkmark::before {
+  content: '';
+  background-color: #30cfd0;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.checkmark:checked::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.checked {
+  opacity: 1;
+}
+
+@media (max-width: 48rem) {
+  .header {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .header ul {
+    padding: 0.1rem 0 !important ;
+  }
+  .header li {
+    letter-spacing: 0;
+    font-size: 0.7rem;
+    margin: 0;
+    padding: 0.9rem;
+    width: 80%;
+  }
+
+  .header li:first-child {
+    background-color: #d8d8d82d;
+  }
+  .header li:first-child:hover {
+    background-color: #d1d1d13f;
+  }
+
+  .header ul {
+    margin: 0;
+    padding: 0;
+  }
+  .header ul li a {
+    padding: 0;
+  }
+}
