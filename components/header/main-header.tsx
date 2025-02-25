@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useCheckbox } from '@/hooks/CheckboxContext';
-import { SignupButton } from './auth-buttons/AuthButtons';
+import { SignupButton } from './auth/auth-buttons/AuthButtons';
 import classes from './main-header.module.css';
 
 const Checkbox = dynamic(() => import('./Checkbox'), {
