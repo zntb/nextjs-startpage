@@ -1,30 +1,37 @@
 'use client';
 
-import { useState } from 'react';
-import SignupModal from '../auth-modals/SignupModal';
+import { useAuthModal } from '@/hooks/AuthModalProvider';
 import classes from './auth-buttons.module.css';
 
-export function SignupButton() {
-  const [isOpen, setIsOpen] = useState(false);
+export function AuthButton() {
+  const { openModal } = useAuthModal();
 
   return (
-    <>
-      <button className={classes.signupButton} onClick={() => setIsOpen(true)}>
-        Sign Up
-      </button>
-      {isOpen && <SignupModal onClose={() => setIsOpen(false)} />}
-    </>
+    <button
+      className={classes.signupButton}
+      onClick={() => openModal('signup')}
+    >
+      Auth
+    </button>
   );
 }
-export function LoginButton() {
-  const [isOpen, setIsOpen] = useState(false);
+
+export function SignupButton() {
+  const { openModal } = useAuthModal();
 
   return (
-    <>
-      <button className={classes.signupButton} onClick={() => setIsOpen(true)}>
-        Login
-      </button>
-      {isOpen && <SignupModal onClose={() => setIsOpen(false)} />}
-    </>
+    <button className={classes.authButtons} onClick={() => openModal('signup')}>
+      Sign Up
+    </button>
+  );
+}
+
+export function LoginButton() {
+  const { openModal } = useAuthModal();
+
+  return (
+    <button className={classes.authButtons} onClick={() => openModal('login')}>
+      Login
+    </button>
   );
 }

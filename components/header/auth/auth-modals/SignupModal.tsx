@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import classes from './auth-modals.module.css';
+import { LoginButton } from '../auth-buttons/AuthButtons';
 
 export default function SignupModal({ onClose }: { onClose: () => void }) {
   const [formData, setFormData] = useState({
@@ -70,6 +71,10 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
           <button className={classes.modalContentButton} type='submit'>
             Register
           </button>
+          <span className={classes.link}>
+            <p className={classes.linkText}>Already have an account?</p>
+            <LoginButton />
+          </span>
         </form>
         <button className={classes.closeButton} onClick={onClose}>
           <IoCloseCircleOutline />

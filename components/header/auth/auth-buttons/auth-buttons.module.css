@@ -6,6 +6,22 @@
   cursor: pointer;
   border-radius: 5px;
   width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.authButtons {
+  background: #d8d8d800;
+  color: #707070;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.authButtons:hover {
+  background: #d8d8d852;
 }
 
 @media (max-width: 48rem) {

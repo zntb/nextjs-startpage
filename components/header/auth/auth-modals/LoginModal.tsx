@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import classes from './auth-modals.module.css';
+import { SignupButton } from '../auth-buttons/AuthButtons';
 
-export default function SignupModal({ onClose }: { onClose: () => void }) {
+export default function LoginModal({ onClose }: { onClose: () => void }) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -27,7 +28,7 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
   return (
     <div className={classes.modalOverlay} onClick={onClose}>
       <div className={classes.modalContent} onClick={e => e.stopPropagation()}>
-        <h2>Sign Up</h2>
+        <h2>Login</h2>
         {error && <p className={classes.error}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <input
@@ -48,12 +49,17 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
           />
 
           <button className={classes.modalContentButton} type='submit'>
-            Register
+            Login
           </button>
         </form>
         <button className={classes.closeButton} onClick={onClose}>
           <IoCloseCircleOutline />
         </button>
+
+        <span className={classes.link}>
+          <p className={classes.linkText}>Not registered yet?</p>
+          <SignupButton />
+        </span>
       </div>
     </div>
   );
