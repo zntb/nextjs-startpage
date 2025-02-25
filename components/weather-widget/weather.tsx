@@ -67,13 +67,13 @@ function WeatherClient() {
 
   return (
     <div className={classes.weatherWidget}>
-      <Link href="https://nextjs-tanstack-weather-app.vercel.app/">
+      <Link href='https://nextjs-tanstack-weather-app.vercel.app/'>
         <div className={classes.cardm}>
           <div className={classes.card}>
             <div className={classes.weatherIcon}>
               <Image
                 src={`/icons/3d/${weather.icon}.png`}
-                alt=""
+                alt=''
                 width={72}
                 height={72}
                 priority
@@ -91,7 +91,7 @@ function WeatherClient() {
             <div className={classes.upper}>
               <div className={classes.humidity}>
                 <div className={classes.humidityText}>
-                  Páratartalom
+                  Humidity
                   <br />
                   <span className={classes.humidityId}>
                     {weather.humidity}%
@@ -102,7 +102,7 @@ function WeatherClient() {
 
               <div className={classes.air}>
                 <div className={classes.airText}>
-                  Szél
+                  Wind
                   <br />
                   <span className={classes.windId}>{weather.wind} Km/h</span>
                 </div>
@@ -123,7 +123,7 @@ function WeatherClient() {
               <div className={classes.realFeel}>
                 <RealFeel />
                 <div className={classes.realFeelText}>
-                  Hőérzet
+                  Feels Like
                   <br />
                   <span className={classes.feels}>{weather.feels}°C</span>
                 </div>
@@ -131,8 +131,8 @@ function WeatherClient() {
 
               <div className={classes.pressure}>
                 <Pressure />
-                <div className={classes.pressuretext}>
-                  Nyomás
+                <div className={classes.pressureText}>
+                  Pressure
                   <br />
                   <span className={classes.pressure}>
                     {weather.pressure} mBar

@@ -25,33 +25,33 @@ export default function Search() {
     <div className={classes.container}>
       <form className={classes.search} onSubmit={handleSubmit}>
         <input
-          id="searchInput"
-          type="text"
-          placeholder="Keresés DuckDuckGo..."
+          id='searchInput'
+          type='text'
+          placeholder='DuckDuckGo search...'
           className={classes.searchInput}
           value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={e => setSearchValue(e.target.value)}
         />
         <div className={classes.buttons}>
           {searchValue && (
             <button
               className={classes.closeButton}
               onClick={onClear}
-              type="button"
+              type='button'
             >
               <Image
-                src="/icons/close.svg"
-                alt="close icon"
+                src='/icons/close.svg'
+                alt='close icon'
                 width={20}
                 height={20}
                 priority
               />
             </button>
           )}
-          <button className={classes.searchButton} type="submit">
+          <button className={classes.searchButton} type='submit'>
             <Image
-              src="/icons/loupe.svg"
-              alt="loupe icon"
+              src='/icons/loupe.svg'
+              alt='loupe icon'
               width={20}
               height={20}
               priority

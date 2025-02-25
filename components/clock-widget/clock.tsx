@@ -31,16 +31,16 @@ function Clock() {
   return (
     <div className={classes.clock}>
       <div>
-        <span id="hour">{hour}</span>
-        <span className={classes.text}>Óra</span>
+        <span id='hour'>{hour}</span>
+        <span className={classes.text}>Hour</span>
       </div>
       <div>
-        <span id="minutes">{min}</span>
-        <span className={classes.text}>Perc</span>
+        <span id='minutes'>{min}</span>
+        <span className={classes.text}>Minute</span>
       </div>
       <div>
-        <span id="seconds">{sec}</span>
-        <span className={classes.text}>Másodperc</span>
+        <span id='seconds'>{sec}</span>
+        <span className={classes.text}>Second</span>
       </div>
     </div>
   );
