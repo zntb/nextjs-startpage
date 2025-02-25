@@ -74,6 +74,16 @@
   color: black;
 }
 
+.linkText {
+  margin: 0.45rem 0;
+  color: #707070;
+}
+
+/* .link {
+  margin-top: 0.45rem;
+  cursor: pointer;
+} */
+
 /* Error Message */
 .error {
   color: red;

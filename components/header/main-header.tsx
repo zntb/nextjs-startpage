@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useCheckbox } from '@/hooks/CheckboxContext';
-import { SignupButton } from './auth/auth-buttons/AuthButtons';
+import { AuthButton } from './auth/auth-buttons/AuthButtons';
 import classes from './main-header.module.css';
 
 const Checkbox = dynamic(() => import('./Checkbox'), {
@@ -20,7 +20,7 @@ function MainHeader() {
       <nav className={classes.nav}>
         <ul>
           <li>
-            <SignupButton />
+            <AuthButton />
           </li>
           <li>
             <a href={`https://github.com/${userName}`}>Github</a>

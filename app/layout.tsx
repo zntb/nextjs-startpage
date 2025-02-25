@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { CheckboxProvider } from '@/hooks/CheckboxContext';
+import { AuthModalProvider } from '@/hooks/AuthModalProvider';
 import { Toaster } from 'react-hot-toast';
 
 import './globals.css';
@@ -26,20 +27,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <CheckboxProvider>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Toaster
-            position='bottom-right'
-            toastOptions={{
-              duration: 3000,
-              style: { background: '#e0e0e0', color: '#161616' },
-            }}
-          />
+          <AuthModalProvider>
+            <Toaster
+              position='bottom-right'
+              toastOptions={{
+                duration: 3000,
+                style: { background: '#e0e0e0', color: '#161616' },
+              }}
+            />
 
-          {children}
+            {children}
+          </AuthModalProvider>
         </body>
       </CheckboxProvider>
     </html>
