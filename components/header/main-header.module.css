@@ -106,7 +106,7 @@
 }
 
 .signOutButton {
-  /* background: #d8d8d82d; */
+  background: #d8d8d82d;
   color: white;
   padding: 1rem 1.4rem;
   border: none;
@@ -152,5 +152,10 @@
   }
   .header ul li a {
     padding: 0;
+  }
+
+  .signOutButton {
+    padding: 0;
+    background: none;
   }
 }
