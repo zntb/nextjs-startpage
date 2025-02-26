@@ -1,8 +1,8 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import prisma from './prisma';
-import { validateLinkData } from './validators';
+import prisma from '../prisma';
+import { validateLinkData } from '../validators';
 import { auth } from '@/auth'; // Assuming you're using NextAuth.js or similar
 
 export interface Link {

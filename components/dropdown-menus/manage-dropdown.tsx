@@ -5,7 +5,7 @@ import { FaEdit, FaTrash, FaPlusCircle } from 'react-icons/fa';
 import Modal from './modal';
 import UpdateDropdownForm from './update-dropdown-form';
 import AddDropdownForm from './add-dropdown-form';
-import { changeOrder, deleteDropdownItem } from '@/lib/actions';
+import { changeOrder, deleteDropdownItem } from '@/lib/actions/dropdown';
 import toast from 'react-hot-toast';
 import classes from './dropdown.module.css';
 
@@ -24,7 +24,7 @@ import {
   useSortable,
 } from '@dnd-kit/sortable/dist';
 import { CSS } from '@dnd-kit/utilities';
-import { Link } from '@/lib/actions';
+import { Link } from '@/lib/actions/dropdown';
 
 type DropdownContentProps = {
   category: string;
@@ -46,8 +46,8 @@ function ManageDropdown({ category, links, categoryId }: DropdownContentProps) {
 
     if (!over || active.id === over.id) return;
 
-    const oldIndex = items.findIndex((link) => link.id === active.id);
-    const newIndex = items.findIndex((link) => link.id === over.id);
+    const oldIndex = items.findIndex(link => link.id === active.id);
+    const newIndex = items.findIndex(link => link.id === over.id);
 
     const newLinksOrder = arrayMove(items, oldIndex, newIndex);
 
@@ -88,7 +88,7 @@ function ManageDropdown({ category, links, categoryId }: DropdownContentProps) {
         success: 'Link deleted successfully',
         error: 'Failed to delete link',
       })
-      .catch((error) => console.error(error));
+      .catch(error => console.error(error));
 
     setEditIndex(null);
     setIsAdding(false);
@@ -107,7 +107,7 @@ function ManageDropdown({ category, links, categoryId }: DropdownContentProps) {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <SortableContext items={items.map((item) => item.id)}>
+      <SortableContext items={items.map(item => item.id)}>
         <div className={classes.dropdown}>
           <button className={classes.dropbtn}>{category}</button>
           <div className={classes.dropdownContent}>
@@ -179,21 +179,21 @@ function SortableLink({
       <div className={classes.buttonContainer}>
         <button
           className={classes.updateButton}
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation();
             onEditClick(index);
           }}
         >
-          <FaEdit color="#222222" />
+          <FaEdit color='#222222' />
         </button>
         <button
           className={classes.deleteButton}
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation();
             onDeleteClick(index);
           }}
         >
-          <FaTrash color="#e46161" />
+          <FaTrash color='#e46161' />
         </button>
       </div>
     </div>

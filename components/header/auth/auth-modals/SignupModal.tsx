@@ -1,11 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import classes from './auth-modals.module.css';
 import { LoginButton } from '../auth-buttons/AuthButtons';
+import { signIn } from 'next-auth/react';
+import Image from 'next/image';
+import { registerUser } from '@/lib/actions/auth';
 
 export default function SignupModal({ onClose }: { onClose: () => void }) {
+  const [data, action] = useActionState(registerUser, {
+    success: false,
+    message: '',
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,69 +22,87 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
     confirmPassword: '',
   });
 
-  const [error, setError] = useState('');
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-    setError('');
-    console.log('User Registered:', formData);
-    onClose();
-  };
+  const { pending } = useFormStatus();
 
   return (
     <div className={classes.modalOverlay} onClick={onClose}>
       <div className={classes.modalContent} onClick={e => e.stopPropagation()}>
         <h2>Sign Up</h2>
-        {error && <p className={classes.error}>{error}</p>}
-        <form onSubmit={handleSubmit}>
+
+        <form action={action}>
           <input
+            id='name'
             type='text'
             name='name'
             placeholder='Name'
+            autoComplete='name'
             value={formData.name}
             onChange={handleChange}
             required
           />
           <input
+            id='email'
             type='email'
             name='email'
             placeholder='Email'
+            autoComplete='email'
             value={formData.email}
             onChange={handleChange}
             required
           />
           <input
+            id='password'
             type='password'
             name='password'
             placeholder='Password'
+            autoComplete='password'
             value={formData.password}
             onChange={handleChange}
             required
           />
           <input
+            id='confirmPassword'
             type='password'
             name='confirmPassword'
             placeholder='Confirm Password'
+            autoComplete='confirmPassword'
             value={formData.confirmPassword}
             onChange={handleChange}
             required
           />
           <button className={classes.modalContentButton} type='submit'>
-            Register
+            {pending ? 'Submitting...' : 'Sign Up'}
           </button>
-          <span className={classes.link}>
-            <p className={classes.linkText}>Already have an account?</p>
-            <LoginButton />
-          </span>
+
+          {data && !data.success && (
+            <div className={classes.error}>{data.message}</div>
+          )}
+          {data && data.success && (
+            <div className={classes.success}>{data.message}</div>
+          )}
         </form>
+        <div className={classes.google}>
+          <button
+            className={classes.googleButton}
+            onClick={() => signIn('google')}
+          >
+            <Image src='/google.png' alt='Google Logo' width={20} height={20} />
+            <span>Sign up with Google</span>
+          </button>
+        </div>
+
+        <span className={classes.link}>
+          <p className={classes.linkText}>Already have an account?</p>
+          <LoginButton />
+        </span>
+
         <button className={classes.closeButton} onClick={onClose}>
           <IoCloseCircleOutline />
         </button>

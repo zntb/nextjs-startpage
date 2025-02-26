@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import { createLinkInCategory } from '@/lib/actions';
+import { createLinkInCategory } from '@/lib/actions/dropdown';
 import toast from 'react-hot-toast';
 import classes from './dropdown.module.css';
 import { useState } from 'react';
