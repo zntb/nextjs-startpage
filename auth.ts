@@ -34,6 +34,24 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider !== 'credentials') return true;
+
+      if (!user.id) {
+        return false;
+      }
+
+      const existingUser = await prisma.user.findUnique({
+        where: { id: user.id },
+      });
+
+      if (!existingUser) return false;
+
+      // console.log('existingUser from auth.ts signin: ', existingUser);
+
+      return true;
+    },
+
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;

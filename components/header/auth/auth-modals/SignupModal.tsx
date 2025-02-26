@@ -5,9 +5,8 @@ import { useFormStatus } from 'react-dom';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import classes from './auth-modals.module.css';
 import { LoginButton } from '../auth-buttons/AuthButtons';
-import { signIn } from 'next-auth/react';
-import Image from 'next/image';
 import { registerUser } from '@/lib/actions/auth';
+import GoogleButton from './GoogleButton';
 
 export default function SignupModal({ onClose }: { onClose: () => void }) {
   const [data, action] = useActionState(registerUser, {
@@ -88,15 +87,7 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
             <div className={classes.success}>{data.message}</div>
           )}
         </form>
-        <div className={classes.google}>
-          <button
-            className={classes.googleButton}
-            onClick={() => signIn('google')}
-          >
-            <Image src='/google.png' alt='Google Logo' width={20} height={20} />
-            <span>Sign up with Google</span>
-          </button>
-        </div>
+        <GoogleButton />
 
         <span className={classes.link}>
           <p className={classes.linkText}>Already have an account?</p>
