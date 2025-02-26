@@ -3,9 +3,9 @@
   background-color: #083344; /* bg-cyan-950 */
   opacity: 0.9;
   color: white;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   border-radius: 8px;
-  width: 18rem;
+  width: 16rem;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
