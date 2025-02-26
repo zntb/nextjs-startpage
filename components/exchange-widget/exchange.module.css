@@ -1,16 +1,53 @@
-/* Convertor */
-
-.exchangeRates {
-  opacity: 80%;
+.container {
+  display: none;
+  background-color: #083344; /* bg-cyan-950 */
+  opacity: 0.9;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 18rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-.exchangeRates iframe {
-  text-decoration: none;
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.65rem;
+}
+
+.input {
+  width: 100%;
+  font-size: 0.9rem !important;
   color: black;
+  padding: 0.3rem;
+  border-radius: 4px;
 }
 
-@media (max-width: 53rem) {
-  .exchangeRates {
-    display: none;
+.inputContainer {
+  margin-top: 0.75rem;
+}
+
+.result {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.date {
+  text-align: center;
+  margin-top: 0.65rem;
+  font-size: 0.65rem;
+  margin-top: 0.45rem;
+}
+
+@media (min-width: 53rem) {
+  .container {
+    display: block;
   }
 }
