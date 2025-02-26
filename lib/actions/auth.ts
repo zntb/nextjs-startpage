@@ -9,6 +9,8 @@ import { formatError } from '@/lib/utils';
 import { signIn, signOut } from '@/auth';
 import { signupSchema, loginSchema } from '../zodSchemas';
 
+const DEFAULT_CATEGORIES = ['E-mail', 'Media', 'Social', 'Tech', 'Tools'];
+
 export async function registerUser(prevState: unknown, formdata: FormData) {
   try {
     const validatedFields = signupSchema.safeParse({
@@ -50,7 +52,30 @@ export async function registerUser(prevState: unknown, formdata: FormData) {
       },
     });
 
-    console.log('Created user: ', user);
+    // console.log('Created user: ', user);
+
+    const existingCategories = await prisma.category.findMany({
+      where: {
+        name: { in: DEFAULT_CATEGORIES },
+      },
+    });
+
+    const existingCategoryNames = new Set(existingCategories.map(c => c.name));
+
+    // Insert missing categories
+    const newCategories = DEFAULT_CATEGORIES.filter(
+      name => !existingCategoryNames.has(name),
+    );
+
+    if (newCategories.length > 0) {
+      await prisma.category.createMany({
+        data: newCategories.map((name, index) => ({
+          name,
+          userId: user.id,
+          order: index + 1,
+        })),
+      });
+    }
 
     await signIn('credentials', {
       email: validatedFields.data.email,
@@ -130,4 +155,6 @@ export async function loginUser(prevState: unknown, formdata: FormData) {
 
 export async function signOutUser() {
   await signOut();
+
+  revalidatePath('/');
 }

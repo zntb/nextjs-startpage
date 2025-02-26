@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import prisma from '../prisma';
 import { validateLinkData } from '../validators';
-import { auth } from '@/auth'; // Assuming you're using NextAuth.js or similar
+import { auth } from '@/auth';
 
 export interface Link {
   id: string;
@@ -57,6 +57,8 @@ export async function createLinkInCategory(
 ) {
   const session = await auth();
 
+  console.log('session user: ', session?.user.name);
+
   if (!session?.user?.id) {
     return { success: false, message: 'Not authenticated.' };
   }
@@ -66,6 +68,9 @@ export async function createLinkInCategory(
   const categoryId = formData.get('categoryId') as string;
   const title = formData.get('title') as string;
   const url = formData.get('url') as string;
+
+  if (!categoryId) {
+  }
 
   const validationResult = validateLinkData(categoryId, title, url);
 
@@ -80,7 +85,7 @@ export async function createLinkInCategory(
   // Continue with database operations if validation is successful
   try {
     const category = await prisma.category.findUnique({
-      where: { id: categoryId, userId: userId }, // Ensure category belongs to the user
+      where: { id: categoryId, userId: userId },
     });
 
     if (!category) {
