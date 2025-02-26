@@ -3,8 +3,10 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { CheckboxProvider } from '@/hooks/CheckboxContext';
 import { AuthModalProvider } from '@/hooks/AuthModalProvider';
 import { Toaster } from 'react-hot-toast';
+import { SessionProvider } from 'next-auth/react';
 
 import './globals.css';
+import { auth } from '@/auth';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -21,29 +23,32 @@ export const metadata: Metadata = {
   description: 'NextJS StartPage',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang='en' suppressHydrationWarning>
       <CheckboxProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <AuthModalProvider>
-            <Toaster
-              position='bottom-right'
-              toastOptions={{
-                duration: 3000,
-                style: { background: '#e0e0e0', color: '#161616' },
-              }}
-            />
+        <SessionProvider session={session}>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <AuthModalProvider>
+              <Toaster
+                position='bottom-right'
+                toastOptions={{
+                  duration: 3000,
+                  style: { background: '#e0e0e0', color: '#161616' },
+                }}
+              />
 
-            {children}
-          </AuthModalProvider>
-        </body>
+              {children}
+            </AuthModalProvider>
+          </body>
+        </SessionProvider>
       </CheckboxProvider>
     </html>
   );

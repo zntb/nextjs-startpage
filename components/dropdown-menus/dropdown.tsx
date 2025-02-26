@@ -3,7 +3,7 @@
 import { useCheckbox } from '@/hooks/CheckboxContext';
 import ManageDropdown from './manage-dropdown';
 import DropdownContent from './dropdown-content';
-import { Category } from '@/lib/actions';
+import { Category } from '@/lib/actions/dropdown';
 
 interface DropdownProps {
   categories: Category[];
@@ -17,7 +17,7 @@ function Dropdown({ categories }: DropdownProps) {
   return (
     <>
       {isChecked
-        ? categories.map((category) => (
+        ? categories.map(category => (
             <ManageDropdown
               key={category.id}
               category={category.name}
@@ -25,7 +25,7 @@ function Dropdown({ categories }: DropdownProps) {
               categoryId={category.id}
             />
           ))
-        : categories.map((category) => (
+        : categories.map(category => (
             <DropdownContent
               key={category.id}
               category={category.name}

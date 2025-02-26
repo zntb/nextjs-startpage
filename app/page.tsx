@@ -8,8 +8,8 @@ import Weather from '@/components/weather-widget/weather';
 import Footer from '@/components/footer/footer';
 import classes from './page.module.css';
 
-import { getDropdownLinks } from '@/lib/actions';
-import { Category } from '@/lib/actions';
+import { getDropdownLinks } from '@/lib/actions/dropdown';
+import { Category } from '@/lib/actions/dropdown';
 import { DROPDOWN_CONTENT } from '@/lib/constants';
 import crypto from 'crypto';
 

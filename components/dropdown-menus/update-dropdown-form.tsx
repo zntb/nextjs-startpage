@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useActionState } from 'react';
-import { updateDropdownItem } from '@/lib/actions';
+import { updateDropdownItem } from '@/lib/actions/dropdown';
 import toast from 'react-hot-toast';
 import classes from './dropdown.module.css';
 

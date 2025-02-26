@@ -1,57 +1,68 @@
 'use client';
 
-import { useState } from 'react';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
+import Image from 'next/image';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import classes from './auth-modals.module.css';
 import { SignupButton } from '../auth-buttons/AuthButtons';
+import { loginUser } from '@/lib/actions/auth';
+import { signIn } from '@/auth';
+
+const loginDefaultValues = { email: '', password: '' };
 
 export default function LoginModal({ onClose }: { onClose: () => void }) {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+  const [data, action] = useActionState(loginUser, {
+    success: false,
+    message: '',
   });
-
-  const [error, setError] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setError('');
-    console.log('User Registered:', formData);
-    onClose();
-  };
+  const { pending } = useFormStatus();
 
   return (
     <div className={classes.modalOverlay} onClick={onClose}>
       <div className={classes.modalContent} onClick={e => e.stopPropagation()}>
         <h2>Login</h2>
-        {error && <p className={classes.error}>{error}</p>}
-        <form onSubmit={handleSubmit}>
+
+        <form action={action}>
           <input
+            id='email'
             type='email'
             name='email'
             placeholder='Email'
-            value={formData.email}
-            onChange={handleChange}
+            autoComplete='email'
+            defaultValue={loginDefaultValues.email}
             required
           />
           <input
+            id='password'
             type='password'
             name='password'
             placeholder='Password'
-            value={formData.password}
-            onChange={handleChange}
+            autoComplete='password'
+            defaultValue={loginDefaultValues.password}
             required
           />
 
           <button className={classes.modalContentButton} type='submit'>
-            Login
+            {pending ? 'Logging In...' : 'Login'}
           </button>
+
+          {data && !data.success && (
+            <div className={classes.error}>{data.message}</div>
+          )}
+          {data && data.success && (
+            <div className={classes.success}>{data.message}</div>
+          )}
         </form>
+        <div className={classes.google}>
+          <button
+            className={classes.googleButton}
+            onClick={() => signIn('google')}
+          >
+            <Image src='/google.png' alt='Google Logo' width={20} height={20} />
+            <span>Sign up with Google</span>
+          </button>
+        </div>
         <button className={classes.closeButton} onClick={onClose}>
           <IoCloseCircleOutline />
         </button>
