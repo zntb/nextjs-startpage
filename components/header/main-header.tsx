@@ -18,7 +18,7 @@ function MainHeader() {
 
   const user = useCurrentUser();
 
-  console.log('session user: ', user);
+  // console.log('session user: ', user);
 
   return (
     <header className={classes.header}>

@@ -57,6 +57,27 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
+
+        // Check if the user exists in the DB
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email as string },
+          include: { categories: true }, // Fetch user categories
+        });
+
+        // If the user has no categories, add default ones
+        if (existingUser && existingUser.categories.length === 0) {
+          await prisma.category.createMany({
+            data: [
+              { name: 'E-mail', userId: existingUser.id, order: 1 },
+              { name: 'Media', userId: existingUser.id, order: 2 },
+              { name: 'Social', userId: existingUser.id, order: 3 },
+              { name: 'Tech', userId: existingUser.id, order: 4 },
+              { name: 'Tools', userId: existingUser.id, order: 5 },
+            ],
+          });
+
+          console.log(`✅ Categories added for OAuth user: ${user.email}`);
+        }
       }
       return token;
     },
