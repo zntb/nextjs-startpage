@@ -5,7 +5,7 @@ import { useCheckbox } from '@/hooks/CheckboxContext';
 import { AuthButton } from './auth/auth-buttons/AuthButtons';
 import classes from './main-header.module.css';
 import { useCurrentUser } from '@/hooks/useSession';
-import { signOutUser } from '@/lib/actions/auth';
+import { signOut } from 'next-auth/react';
 
 const Checkbox = dynamic(() => import('./Checkbox'), {
   ssr: false,
@@ -32,14 +32,12 @@ function MainHeader() {
           </li>
           {user ? (
             <li>
-              <form action={signOutUser}>
-                <button
-                  className={classes.signOutButton}
-                  onClick={() => signOutUser()}
-                >
-                  Signout
-                </button>
-              </form>
+              <button
+                className={classes.signOutButton}
+                onClick={() => signOut()}
+              >
+                Signout
+              </button>
             </li>
           ) : (
             <li>

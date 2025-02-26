@@ -8,8 +8,8 @@ import { hash, compare } from 'bcryptjs';
 import { formatError } from '@/lib/utils';
 import { signIn, signOut } from '@/auth';
 import { signupSchema, loginSchema } from '../zodSchemas';
-
-const DEFAULT_CATEGORIES = ['E-mail', 'Media', 'Social', 'Tech', 'Tools'];
+import { DEFAULT_CATEGORIES } from '../constants';
+import { redirect } from 'next/navigation';
 
 export async function registerUser(prevState: unknown, formdata: FormData) {
   try {
@@ -21,9 +21,16 @@ export async function registerUser(prevState: unknown, formdata: FormData) {
     });
 
     if (!validatedFields.success) {
+      const errors = validatedFields.error.flatten().fieldErrors;
       return {
         success: false,
-        message: validatedFields.error.message,
+        message: 'Validation failed',
+        errors: {
+          name: errors.name?.[0] || '',
+          email: errors.email?.[0] || '',
+          password: errors.password?.[0] || '',
+          confirmPassword: errors.confirmPassword?.[0] || '',
+        },
       };
     }
 
@@ -37,9 +44,9 @@ export async function registerUser(prevState: unknown, formdata: FormData) {
       return {
         success: false,
         message: 'User already exists',
+        errors: {},
       };
     }
-
     const hashedPassword = await hash(validatedFields.data.password, 10);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -80,24 +87,32 @@ export async function registerUser(prevState: unknown, formdata: FormData) {
     await signIn('credentials', {
       email: validatedFields.data.email,
       password: validatedFields.data.password,
-      redirect: false,
+      redirect: true,
     });
 
     revalidatePath('/');
-    return { success: true, message: 'User created successfully' };
+    return { success: true, message: 'User created successfully', errors: {} };
   } catch (error) {
     if (isRedirectError(error)) {
       throw error;
     } else if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return { error: 'Invalid Credentials!' };
+          return {
+            success: false,
+            message: 'Invalid Credentials!',
+            errors: {},
+          };
         default:
-          return { error: 'Something went wrong!' };
+          return {
+            success: false,
+            message: 'Something went wrong!',
+            errors: {},
+          };
       }
     }
 
-    return { success: false, message: formatError(error) };
+    return { success: false, message: formatError(error), errors: {} };
   }
 }
 
@@ -109,9 +124,14 @@ export async function loginUser(prevState: unknown, formdata: FormData) {
     });
 
     if (!validatedFields.success) {
+      const errors = validatedFields.error.flatten().fieldErrors;
       return {
         success: false,
         message: formatError(validatedFields.error),
+        errors: {
+          email: errors.email?.[0] || '',
+          password: errors.password?.[0] || '',
+        },
       };
     }
 
@@ -120,7 +140,7 @@ export async function loginUser(prevState: unknown, formdata: FormData) {
     });
 
     if (!user || !user.password) {
-      return { success: false, message: 'Invalid credentials' };
+      return { success: false, message: 'Invalid credentials', errors: {} };
     }
 
     const passwordMatch = await compare(
@@ -129,7 +149,7 @@ export async function loginUser(prevState: unknown, formdata: FormData) {
     );
 
     if (!passwordMatch) {
-      return { success: false, message: 'Invalid credentials' };
+      return { success: false, message: 'Invalid credentials', errors: {} };
     }
 
     await signIn('credentials', {
@@ -137,19 +157,32 @@ export async function loginUser(prevState: unknown, formdata: FormData) {
       password: validatedFields.data.password,
     });
 
-    return { success: true, message: 'User signed in successfully' };
+    return {
+      success: true,
+      message: 'User signed in successfully',
+      errors: {},
+    };
   } catch (error) {
     if (isRedirectError(error)) {
       throw error;
     } else if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return { error: 'Invalid Credentials!' };
+          return {
+            success: false,
+            message: 'Invalid Credentials!',
+            errors: {},
+          };
         default:
-          return { error: 'Something went wrong!' };
+          return {
+            success: false,
+            message: 'Something went wrong!',
+            errors: {},
+          };
       }
     }
-    return { success: false, message: 'Invalid email or password' };
+
+    return { success: false, message: formatError(error), errors: {} };
   }
 }
 
@@ -157,4 +190,5 @@ export async function signOutUser() {
   await signOut();
 
   revalidatePath('/');
+  redirect('/');
 }
