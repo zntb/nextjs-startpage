@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useState, useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import classes from './auth-modals.module.css';
@@ -8,14 +8,26 @@ import { SignupButton } from '../auth-buttons/AuthButtons';
 import { loginUser } from '@/lib/actions/auth';
 import GoogleButton from './GoogleButton';
 
-const loginDefaultValues = { email: '', password: '' };
-
 export default function LoginModal({ onClose }: { onClose: () => void }) {
   const [data, action] = useActionState(loginUser, {
     success: false,
     message: '',
+    errors: {},
   });
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
   const { pending } = useFormStatus();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   return (
     <div className={classes.modalOverlay} onClick={onClose}>
@@ -29,18 +41,26 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
             name='email'
             placeholder='Email'
             autoComplete='email'
-            defaultValue={loginDefaultValues.email}
+            value={formData.email}
+            onChange={handleChange}
             required
           />
+          {data.errors?.email && (
+            <p className={classes.error}>{data.errors.email}</p>
+          )}
           <input
             id='password'
             type='password'
             name='password'
             placeholder='Password'
             autoComplete='password'
-            defaultValue={loginDefaultValues.password}
+            value={formData.password}
+            onChange={handleChange}
             required
           />
+          {data.errors?.password && (
+            <p className={classes.error}>{data.errors.password}</p>
+          )}
 
           <button className={classes.modalContentButton} type='submit'>
             {pending ? 'Logging In...' : 'Login'}

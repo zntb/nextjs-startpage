@@ -45,4 +45,4 @@ async function deleteUser(userId: string) {
   }
 }
 
-deleteUser('67bef9b6d7cfdf013a72916c');
+deleteUser('67bf216bd7cfdf013a72917a');

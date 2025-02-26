@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { IoCloseCircleOutline } from 'react-icons/io5';
@@ -12,6 +10,7 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
   const [data, action] = useActionState(registerUser, {
     success: false,
     message: '',
+    errors: {},
   });
 
   const [formData, setFormData] = useState({
@@ -46,6 +45,10 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
             onChange={handleChange}
             required
           />
+          {data.errors?.name && (
+            <p className={classes.error}>{data.errors.name}</p>
+          )}
+
           <input
             id='email'
             type='email'
@@ -56,6 +59,10 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
             onChange={handleChange}
             required
           />
+          {data.errors?.email && (
+            <p className={classes.error}>{data.errors.email}</p>
+          )}
+
           <input
             id='password'
             type='password'
@@ -66,6 +73,10 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
             onChange={handleChange}
             required
           />
+          {data.errors?.password && (
+            <p className={classes.error}>{data.errors.password}</p>
+          )}
+
           <input
             id='confirmPassword'
             type='password'
@@ -76,15 +87,19 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
             onChange={handleChange}
             required
           />
+          {data.errors?.confirmPassword && (
+            <p className={classes.error}>{data.errors.confirmPassword}</p>
+          )}
+
           <button className={classes.modalContentButton} type='submit'>
             {pending ? 'Submitting...' : 'Sign Up'}
           </button>
 
           {data && !data.success && (
-            <div className={classes.error}>{data.message}</div>
+            <p className={classes.error}>{data.message}</p>
           )}
           {data && data.success && (
-            <div className={classes.success}>{data.message}</div>
+            <p className={classes.success}>{data.message}</p>
           )}
         </form>
         <GoogleButton />
