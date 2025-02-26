@@ -11,7 +11,7 @@ const Checkbox = dynamic(() => import('./Checkbox'), {
   ssr: false,
 });
 
-// const userName = process.env.USER!.toLowerCase();
+const userName = process.env.NEXT_PUBLIC_USER!.toLowerCase();
 
 function MainHeader() {
   const { isChecked, toggleCheckbox } = useCheckbox();
@@ -20,16 +20,12 @@ function MainHeader() {
 
   console.log('session user: ', user);
 
-  if (!user) {
-    return;
-  }
-
   return (
     <header className={classes.header}>
       <nav className={classes.nav}>
         <ul>
           <li>
-            <a href={`https://github.com/${user.name.toLowerCase()}`}>Github</a>
+            <a href={`https://github.com/${userName}`}>Github</a>
           </li>
           <li>
             <a href='https://chat.openai.com/chat'>ChatGPT</a>

@@ -2,12 +2,11 @@
 
 import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
-import Image from 'next/image';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import classes from './auth-modals.module.css';
 import { SignupButton } from '../auth-buttons/AuthButtons';
 import { loginUser } from '@/lib/actions/auth';
-import { signIn } from '@/auth';
+import GoogleButton from './GoogleButton';
 
 const loginDefaultValues = { email: '', password: '' };
 
@@ -54,15 +53,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
             <div className={classes.success}>{data.message}</div>
           )}
         </form>
-        <div className={classes.google}>
-          <button
-            className={classes.googleButton}
-            onClick={() => signIn('google')}
-          >
-            <Image src='/google.png' alt='Google Logo' width={20} height={20} />
-            <span>Sign up with Google</span>
-          </button>
-        </div>
+        <GoogleButton />
         <button className={classes.closeButton} onClick={onClose}>
           <IoCloseCircleOutline />
         </button>
