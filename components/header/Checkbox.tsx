@@ -14,7 +14,7 @@ const Checkbox = ({ isChecked, onCheckboxChange }: CheckboxProps) => {
     >
       Update &nbsp;
       <input
-        type="checkbox"
+        type='checkbox'
         className={classes.checkmark}
         checked={isChecked}
         onChange={onCheckboxChange}
