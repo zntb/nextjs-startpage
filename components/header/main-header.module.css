@@ -139,10 +139,10 @@
     width: 80%;
   }
 
-  .header li:first-child {
+  .header li:last-child {
     background-color: #d8d8d82d;
   }
-  .header li:first-child:hover {
+  .header li:last-child:hover {
     background-color: #d1d1d13f;
   }
 
