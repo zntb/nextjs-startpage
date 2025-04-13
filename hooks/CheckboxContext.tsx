@@ -2,33 +2,40 @@
 
 import { createContext, useContext, useState } from 'react';
 
-// Define a type for the context value
 type CheckboxContextType = {
-  isChecked: boolean;
-  toggleCheckbox: () => void;
+  isDropdownCheckboxChecked: boolean;
+  isBackgroundCheckboxChecked: boolean;
+  toggleDropdownCheckbox: () => void;
+  toggleBackgroundCheckbox: () => void;
 };
 
-// Create the context with initial value of undefined
 const CheckboxContext = createContext<CheckboxContextType | undefined>(
-  undefined
+  undefined,
 );
 
-// Create a provider component
 export const CheckboxProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isDropdownCheckboxChecked, setIsDropdownCheckboxChecked] =
+    useState(false);
+  const [isBackgroundCheckboxChecked, setIsBackgroundCheckboxChecked] =
+    useState(false);
 
-  const toggleCheckbox = () => {
-    setIsChecked((prev) => !prev);
+  const toggleDropdownCheckbox = () => {
+    setIsDropdownCheckboxChecked(prev => !prev);
   };
 
-  // Value of the context provider
+  const toggleBackgroundCheckbox = () => {
+    setIsBackgroundCheckboxChecked(prev => !prev);
+  };
+
   const contextValue: CheckboxContextType = {
-    isChecked,
-    toggleCheckbox,
+    isDropdownCheckboxChecked,
+    isBackgroundCheckboxChecked,
+    toggleDropdownCheckbox,
+    toggleBackgroundCheckbox,
   };
 
   return (
@@ -38,7 +45,6 @@ export const CheckboxProvider = ({
   );
 };
 
-// Custom hook to use the context
 export const useCheckbox = (): CheckboxContextType => {
   const context = useContext(CheckboxContext);
   if (!context) {

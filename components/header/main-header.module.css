@@ -2,6 +2,7 @@
   align-items: center;
   padding: 0 60px;
   background-color: rgba(4, 27, 41, 0.5);
+  position: relative;
 }
 
 .header ul {
@@ -53,21 +54,39 @@
   transition: all 0.3s ease-in-out;
 }
 
-.checkbox {
+.checkboxContainer {
   position: absolute;
+  top: 0.1rem;
+  right: 0.1rem;
+  background-color: rgba(4, 27, 41, 0.8);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: auto;
+}
+
+.nav:hover .checkboxContainer {
+  opacity: 1;
+}
+
+.checkboxItem {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
   font-size: 18px;
-  right: 0;
   color: #fff;
   cursor: pointer;
   user-select: none;
   display: flex;
   align-items: center;
-  opacity: 0;
   transition: all 0.3s ease-in-out;
-}
-
-.checkbox:hover {
-  opacity: 1;
 }
 
 .checkmark {
@@ -105,6 +124,14 @@
   opacity: 1;
 }
 
+.checkboxContainer hr {
+  text-align: center;
+  margin: auto;
+  width: 80%;
+  height: 1px;
+  border-color: rgba(229, 231, 235, 0.534);
+}
+
 .signOutButton {
   background: #d8d8d82d;
   color: white;
@@ -129,8 +156,9 @@
   }
 
   .header ul {
-    padding: 0.1rem 0 !important ;
+    padding: 0.1rem 0 !important;
   }
+
   .header li {
     letter-spacing: 0;
     font-size: 0.7rem;
@@ -143,6 +171,7 @@
     margin-right: 2.2rem;
     background-color: #d8d8d82d;
   }
+
   .header li:last-child:hover {
     background-color: #d1d1d13f;
   }
@@ -151,8 +180,27 @@
     margin: 0;
     padding: 0;
   }
+
   .header ul li a {
     padding: 0;
+  }
+
+  .nav {
+    margin-right: 1rem;
+  }
+
+  .checkboxContainer {
+    margin: 0 0.2rem 0 0;
+    padding: 0;
+  }
+
+  .checkbox {
+    font-size: 10px;
+  }
+
+  .checkmark {
+    width: 12px;
+    height: 12px;
   }
 
   .signOutButton {
