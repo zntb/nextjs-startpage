@@ -1,0 +1,114 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  deployment_pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      #   - name: Run tests
+      #     run: npm test
+
+      - name: Check Vercel Deployment Status
+        uses: UnlyEd/github-action-await-vercel@v2.0
+        id: await-vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          deployment-url: nextjs-startpage-33mucabue-zntbs-projects.vercel.app
+          timeout: 60
+          poll-interval: 1
+
+      - name: Set Up Git for Commit
+        run: |
+          git config --global user.name "zntb"
+          git config --global user.email "zenetibi@yahoo.com"
+
+      - name: Commit Deployment Changes
+        run: |
+          date > deployment-info.txt  # Adds a timestamp to ensure there's a change
+          git add deployment-info.txt
+          git commit -m "Auto-deployed at $(date)" || echo "No changes to commit."
+
+      - name: Push to Branch
+        run: |
+          # Pull the latest changes to avoid non-fast-forward errors
+          git fetch origin ${{ github.ref_name }}
+          git merge --strategy-option theirs --no-edit origin/${{ github.ref_name }}
+
+          # Push changes back to the branch
+          git push origin ${{ github.ref_name }}
+
+      - name: Create Pull Request with GitHub CLI
+        if: ${{ github.ref_name != 'main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create --title "Automated Deployment PR for ${{ github.ref_name }}" \
+                 --body "This pull request was created automatically after a successful deployment." \
+                 --base main \
+                 --head ${{ github.ref_name }}
+
+      - name: Merge Pull Request with GitHub CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Find the pull request ID for the head branch
+          PR_ID=$(gh pr list --head ${{ github.ref_name }} --json number --jq '.[0].number')
+
+          # Merge the pull request if it exists
+          if [ -n "$PR_ID" ]; then
+            gh pr merge "$PR_ID" --merge --delete-branch
+          else
+            echo "No open pull request found to merge."
+          fi
+
+  auto_merge:
+    needs: deployment_pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Auto-Merge Pull Request
+        if: ${{ github.ref_name != 'main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Find the open pull request ID
+          PR_ID=$(gh pr list --head ${{ github.ref_name }} --json number --jq '.[0].number')
+
+          # Merge the pull request if it exists
+          if [ -n "$PR_ID" ]; then
+            gh pr merge "$PR_ID" --merge --delete-branch --auto
+          else
+            echo "No open pull request found to merge."
+          fi
