@@ -22,7 +22,7 @@ export async function getDropdownLinks(): Promise<Category[]> {
   const session = await auth();
 
   if (!session?.user?.id) {
-    return []; // Or throw an error if you prefer
+    return [];
   }
 
   const userId = session.user.id;

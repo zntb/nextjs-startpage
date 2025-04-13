@@ -1,5 +1,6 @@
 import { ZodError } from 'zod';
 import { Prisma } from '@prisma/client';
+
 export function formatError(error: unknown): string {
   if (error instanceof ZodError) {
     return error.errors.map(err => err.message).join('. ');

@@ -34,6 +34,7 @@ export default async function RootLayout({
       <CheckboxProvider>
         <SessionProvider session={session}>
           <body
+            suppressHydrationWarning
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
             <AuthModalProvider>
