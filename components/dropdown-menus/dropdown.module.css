@@ -19,8 +19,7 @@
   font-size: 1rem;
   text-transform: uppercase;
   min-width: 10rem;
-  box-shadow:
-    0 8px 16px rgb(193, 217, 191),
+  box-shadow: 0 8px 16px rgb(193, 217, 191),
     0 0 0 2.5px rgba(56, 119, 130, 0.922);
   letter-spacing: 1px;
   text-decoration: none;
@@ -120,7 +119,7 @@
 
 .buttonContainer {
   display: flex;
-  gap: 0.5rem; /* Space between buttons */
+  gap: 0.5rem;
 }
 
 .addLinkButton {
@@ -137,7 +136,7 @@
 }
 
 .linkDetails {
-  flex: 1; /* Allow title to take up space */
+  flex: 1;
   text-align: left;
 }
 

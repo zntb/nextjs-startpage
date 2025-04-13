@@ -18,17 +18,19 @@
 
 - Editable Lists: Users can add, edit, and delete links within each category.
 
+- Customizable wallpaper: Users can choose the wallpaper they prefer.
+
 - Persistent Data: All user data is stored in a database, ensuring that users can access their personalized dashboard from any device.
 
 - Footer Links: Useful links are available in the footer for quick access.
 
 ### How It Works
 
-- Guest Users: Unregistered users get a basic list of links.
+- Guest users: Unregistered users will get the default list of links and the default wallpaper.
 
-- Registered Users: Logged-in users can create and manage individual categories and lists.
+- Registered Users: Logged-in users can create and manage individual categories and lists, customize their wallpaper, and save their preferences.
 
-- Edit Mode: By moving the mouse to the top right corner, an 'update' checkbox appears, allowing users to edit their lists and categories.
+- Edit mode: Moving the mouse to the top right corner will bring up the "Update DL" and "Update BG" checkboxes, the former allowing users to edit their lists and categories, the latter to select images.
 
 ### Technologies Used
 

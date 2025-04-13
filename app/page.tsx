@@ -1,4 +1,3 @@
-import BackgroundImage from '@/components/background-image/background-image';
 import Clock from '@/components/clock-widget/clock';
 import Dropdown from '@/components/dropdown-menus/dropdown';
 import Exchange from '@/components/exchange-widget/exchange';
@@ -14,7 +13,7 @@ import { DROPDOWN_CONTENT } from '@/lib/constants';
 import crypto from 'crypto';
 
 export default async function StartPage() {
-  let categories: Category[] = await getDropdownLinks(); // Fetch data from the database
+  let categories: Category[] = await getDropdownLinks();
 
   // If no data is found, use local fallback data
   if (categories.length === 0) {
@@ -32,7 +31,7 @@ export default async function StartPage() {
 
   return (
     <>
-      <BackgroundImage />
+      <div className={classes.backgroundImg} id='dynamic-bg' />
       <MainHeader />
       <main className={classes.main}>
         <section className={classes.topSection}>

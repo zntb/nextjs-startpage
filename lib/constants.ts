@@ -1,3 +1,12 @@
+export const BACKGROUND_IMAGES = [
+  '/images/background.jpg',
+  '/images/background-2.jpg',
+  '/images/background-3.jpg',
+  '/images/background-4.jpg',
+  '/images/background-5.jpg',
+  '/images/background-6.jpg',
+];
+
 export const DROPDOWN_CONTENT: DropdownContent = [
   {
     category: 'E-mail',
