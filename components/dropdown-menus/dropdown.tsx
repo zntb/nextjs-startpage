@@ -10,13 +10,13 @@ interface DropdownProps {
 }
 
 function Dropdown({ categories }: DropdownProps) {
-  const { isChecked } = useCheckbox();
+  const { isDropdownCheckboxChecked } = useCheckbox();
 
   if (!categories) return null;
 
   return (
     <>
-      {isChecked
+      {isDropdownCheckboxChecked
         ? categories.map(category => (
             <ManageDropdown
               key={category.id}
