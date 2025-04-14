@@ -19,7 +19,7 @@
   z-index: 999;
 }
 
-.closeButton {
+/* .closeButton {
   position: absolute;
   top: 2px;
   right: 10px;
@@ -27,4 +27,21 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
+} */
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: #30cfd0;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.closeButton:hover {
+  background-color: #28b6b6;
 }

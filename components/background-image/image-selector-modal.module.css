@@ -12,6 +12,7 @@
 }
 
 .modalContent {
+  position: relative;
   background: #fff;
   border-radius: 10px;
   padding: 20px;
@@ -20,16 +21,45 @@
   text-align: center;
 }
 
+.modalContent h2 {
+  margin: 10px 0 20px 0;
+  color: #252525;
+  font-weight: bold;
+  font-size: 1.15rem;
+}
+
+.fileInput {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
 .imageGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 10px;
 }
 
+.imageItem {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.imageItem:first-child {
+  margin: auto;
+  aspect-ratio: 1;
+  width: 50%;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #cacaca;
+}
+
 .image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   border: 2px solid transparent;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
   cursor: pointer;
   transition: border-color 0.3s ease;
 }
@@ -38,11 +68,33 @@
   border-color: #30cfd0;
 }
 
-.closeButton {
-  margin-top: 20px;
-  padding: 10px 20px;
+.uploadButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 20px;
+  margin: auto;
+  margin-bottom: 0.5rem;
+  width: 50%;
+  border: 2px solid #30cfd0;
+  border-radius: 8px 8px 0 0;
+  height: auto;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.uploadButton:hover {
   background-color: #30cfd0;
-  color: #fff;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: #30cfd0;
+  color: #000000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -51,4 +103,24 @@
 
 .closeButton:hover {
   background-color: #28b6b6;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 20px;
+  width: 100%;
+  border: 2px solid #00000021;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  height: auto;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.deleteButton:hover {
+  background-color: #ffeeee;
+  border: 1px solid #ff0000;
 }

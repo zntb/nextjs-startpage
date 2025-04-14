@@ -1,19 +1,20 @@
+import { IoMdClose } from 'react-icons/io';
 import classes from './modal.module.css';
 
-type ModalProps = {
+type DropdownModalProps = {
   isVisible: boolean;
   onClose: () => void;
   children: React.ReactNode;
 };
 
-function Modal({ isVisible, onClose, children }: ModalProps) {
+function DropdownModal({ isVisible, onClose, children }: DropdownModalProps) {
   if (!isVisible) return null;
 
   return (
     <div className={classes.modalOverlay}>
       <div className={classes.modalContent}>
         <button className={classes.closeButton} onClick={onClose}>
-          &times;
+          <IoMdClose />
         </button>
         {children}
       </div>
@@ -21,4 +22,4 @@ function Modal({ isVisible, onClose, children }: ModalProps) {
   );
 }
 
-export default Modal;
+export default DropdownModal;
