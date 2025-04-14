@@ -10,7 +10,7 @@ interface DropdownProps {
 }
 
 function Dropdown({ categories }: DropdownProps) {
-  const { isDropdownCheckboxChecked } = useCheckbox();
+  const { isDropdownCheckboxChecked, toggleDropdownCheckbox } = useCheckbox();
 
   if (!categories) return null;
 
@@ -23,6 +23,8 @@ function Dropdown({ categories }: DropdownProps) {
               category={category.name}
               links={category.links}
               categoryId={category.id}
+              isDropdownCheckboxChecked={isDropdownCheckboxChecked}
+              toggleDropdownCheckbox={toggleDropdownCheckbox}
             />
           ))
         : categories.map(category => (

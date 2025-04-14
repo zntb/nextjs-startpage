@@ -7,6 +7,8 @@ type CheckboxContextType = {
   isBackgroundCheckboxChecked: boolean;
   toggleDropdownCheckbox: () => void;
   toggleBackgroundCheckbox: () => void;
+  setIsDropdownCheckboxChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsBackgroundCheckboxChecked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CheckboxContext = createContext<CheckboxContextType | undefined>(
@@ -36,6 +38,8 @@ export const CheckboxProvider = ({
     isBackgroundCheckboxChecked,
     toggleDropdownCheckbox,
     toggleBackgroundCheckbox,
+    setIsDropdownCheckboxChecked,
+    setIsBackgroundCheckboxChecked,
   };
 
   return (

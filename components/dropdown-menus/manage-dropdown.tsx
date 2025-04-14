@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { FaEdit, FaTrash, FaPlusCircle } from 'react-icons/fa';
-import Modal from './modal';
+import DropdownModal from './dropdown-modal';
 import UpdateDropdownForm from './update-dropdown-form';
 import AddDropdownForm from './add-dropdown-form';
 import { changeOrder, deleteDropdownItem } from '@/lib/actions/dropdown';
@@ -30,9 +30,17 @@ type DropdownContentProps = {
   category: string;
   links: { id: string; title: string; url: string; order: number }[];
   categoryId: string;
+  isDropdownCheckboxChecked: boolean;
+  toggleDropdownCheckbox: () => void;
 };
 
-function ManageDropdown({ category, links, categoryId }: DropdownContentProps) {
+function ManageDropdown({
+  category,
+  links,
+  categoryId,
+  isDropdownCheckboxChecked,
+  toggleDropdownCheckbox,
+}: DropdownContentProps) {
   const [items, setItems] = useState(links);
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [isAdding, setIsAdding] = useState(false);
@@ -98,6 +106,10 @@ function ManageDropdown({ category, links, categoryId }: DropdownContentProps) {
     // console.log('Closing modal');
     setEditIndex(null);
     setIsAdding(false);
+
+    if (isDropdownCheckboxChecked) {
+      toggleDropdownCheckbox();
+    }
   };
 
   return (
@@ -128,19 +140,22 @@ function ManageDropdown({ category, links, categoryId }: DropdownContentProps) {
       </SortableContext>
 
       {editIndex !== null && (
-        <Modal isVisible={editIndex !== null} onClose={handleCloseModal}>
+        <DropdownModal
+          isVisible={editIndex !== null}
+          onClose={handleCloseModal}
+        >
           <UpdateDropdownForm
             link={items[editIndex]}
             onClose={handleCloseModal}
             categoryId={categoryId}
           />
-        </Modal>
+        </DropdownModal>
       )}
 
       {isAdding && (
-        <Modal isVisible={isAdding} onClose={handleCloseModal}>
+        <DropdownModal isVisible={isAdding} onClose={handleCloseModal}>
           <AddDropdownForm onClose={handleCloseModal} categoryId={categoryId} />
-        </Modal>
+        </DropdownModal>
       )}
     </DndContext>
   );

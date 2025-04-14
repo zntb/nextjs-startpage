@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useCheckbox } from '@/hooks/CheckboxContext';
 import { AuthButton } from './auth/auth-buttons/AuthButtons';
 import ImageSelectorModal from '../background-image/image-selector-modal';
-import { BACKGROUND_IMAGES } from '@/lib/constants';
 import { useCurrentUser } from '@/hooks/useSession';
 import { signOut } from 'next-auth/react';
 import classes from './main-header.module.css';
@@ -16,28 +15,34 @@ const Checkbox = dynamic(() => import('./Checkbox'), {
 
 const userName = process.env.NEXT_PUBLIC_USER!.toLowerCase();
 
+type Wallpaper = {
+  id: string;
+  url: string;
+};
+
 function MainHeader() {
   const {
     isDropdownCheckboxChecked,
     isBackgroundCheckboxChecked,
     toggleDropdownCheckbox,
     toggleBackgroundCheckbox,
+    setIsBackgroundCheckboxChecked,
   } = useCheckbox();
 
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isBackgroundModalVisible, setIsBackgroundModalVisible] =
+    useState(false);
+
   const [backgroundImage, setBackgroundImage] = useState(
     '/images/background.jpg',
   );
+  const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
 
   const user = useCurrentUser();
 
-  const handleSelectImage = (image: string) => {
-    setBackgroundImage(image);
-    localStorage.setItem('selectedBackgroundImage', image);
-    setModalVisible(false);
-    if (isBackgroundCheckboxChecked) {
-      toggleBackgroundCheckbox();
-    }
+  const fetchWallpapers = async () => {
+    const res = await fetch('/api/wallpapers');
+    const data = await res.json();
+    setWallpapers(data);
   };
 
   useEffect(() => {
@@ -53,6 +58,23 @@ function MainHeader() {
       bgElement.style.backgroundImage = `url(${backgroundImage})`;
     }
   }, [backgroundImage]);
+
+  useEffect(() => {
+    if (isBackgroundModalVisible) {
+      fetchWallpapers();
+    }
+  }, [isBackgroundModalVisible]);
+
+  const handleSelectImage = (image: string) => {
+    setBackgroundImage(image);
+    localStorage.setItem('selectedBackgroundImage', image);
+    handleModalClose();
+  };
+
+  const handleModalClose = () => {
+    setIsBackgroundModalVisible(false);
+    setIsBackgroundCheckboxChecked(false);
+  };
 
   return (
     <header className={classes.header}>
@@ -89,23 +111,21 @@ function MainHeader() {
           <Checkbox
             isChecked={isBackgroundCheckboxChecked}
             onCheckboxChange={() => {
+              if (!isBackgroundCheckboxChecked) {
+                setIsBackgroundModalVisible(true);
+              }
               toggleBackgroundCheckbox();
-              setModalVisible(true);
             }}
             label='Update BG'
           />
         </div>
       </nav>
       <ImageSelectorModal
-        isVisible={isModalVisible}
-        onClose={() => {
-          setModalVisible(false);
-          if (isBackgroundCheckboxChecked) {
-            toggleBackgroundCheckbox();
-          }
-        }}
-        images={BACKGROUND_IMAGES}
+        isVisible={isBackgroundModalVisible}
+        onClose={handleModalClose}
+        images={wallpapers}
         onSelectImage={handleSelectImage}
+        onUpdateWallpapers={setWallpapers}
       />
     </header>
   );
