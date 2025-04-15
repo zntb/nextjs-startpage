@@ -124,3 +124,43 @@
   background-color: #ffeeee;
   border: 1px solid #ff0000;
 }
+
+.confirmToast {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toastActions button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.toastActions button:first-of-type {
+  background-color: red;
+  color: white;
+}
+
+.toastActions button:last-of-type {
+  background-color: #ccc;
+}
+
+.previewContainer {
+  margin: 0.3rem 0 0.7rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.previewImage {
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
