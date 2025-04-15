@@ -85,12 +85,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Find the pull request ID for the head branch
           PR_ID=$(gh pr list --head ${{ github.ref_name }} --json number --jq '.[0].number')
 
-          # Merge the pull request if it exists
           if [ -n "$PR_ID" ]; then
-            gh pr merge "$PR_ID" --merge --delete-branch
+            # Try to update the PR branch with latest main
+            gh pr merge "$PR_ID" --merge --delete-branch || {
+              echo "Merge failed. Attempting to rebase with main..."
+              git fetch origin main
+              git checkout ${{ github.ref_name }}
+              git rebase origin/main || git merge origin/main
+              git push origin ${{ github.ref_name }} --force-with-lease
+              echo "Branch updated, PR should now be mergeable."
+            }
           else
             echo "No open pull request found to merge."
           fi
