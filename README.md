@@ -18,7 +18,7 @@
 
 - Editable Lists: Users can add, edit, and delete links within each category.
 
-- Customizable wallpaper: Users can choose the wallpaper they prefer.
+- Customizable backgrounds: Users can select their preferred background image and upload it to the database. The selected image is saved by the browser when you log out.
 
 - Persistent Data: All user data is stored in a database, ensuring that users can access their personalized dashboard from any device.
 
