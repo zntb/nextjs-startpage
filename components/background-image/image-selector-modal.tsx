@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
 import { RiUploadCloudFill } from 'react-icons/ri';
+import { toast } from 'react-hot-toast';
 import classes from './image-selector-modal.module.css';
 
 type Wallpaper = {
@@ -26,6 +27,13 @@ const ImageSelectorModal = ({
   onUpdateWallpapers,
 }: ModalProps) => {
   const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
 
   const handleUpload = async () => {
     if (!file) return;
@@ -38,12 +46,19 @@ const ImageSelectorModal = ({
       body: formData,
     });
 
+    if (images.length >= 5) {
+      toast.error('You have reached the limit of 5 images, please delete some');
+      return;
+    }
+
     if (res.ok) {
       const newWallpaper = await res.json();
       onUpdateWallpapers([...images, newWallpaper]);
+      toast.success('Image uploaded successfully');
       setFile(null);
+      setPreviewUrl(null);
     } else {
-      alert('Upload failed');
+      toast.error('Failed to upload image');
     }
   };
 
@@ -56,8 +71,9 @@ const ImageSelectorModal = ({
 
     if (res.ok) {
       onUpdateWallpapers(images.filter(w => w.id !== id));
+      toast.success('Image deleted successfully');
     } else {
-      alert('Delete failed');
+      toast.error('Failed to delete image');
     }
   };
 
@@ -73,9 +89,24 @@ const ImageSelectorModal = ({
         <input
           type='file'
           accept='image/*'
-          onChange={e => setFile(e.target.files?.[0] || null)}
+          onChange={e => {
+            const selected = e.target.files?.[0] || null;
+            setFile(selected);
+            setPreviewUrl(selected ? URL.createObjectURL(selected) : null);
+          }}
           className={classes.fileInput}
         />
+        {previewUrl && (
+          <div className={classes.previewContainer}>
+            <Image
+              src={previewUrl}
+              alt='Selected preview'
+              width={120}
+              height={120}
+              className={classes.previewImage}
+            />
+          </div>
+        )}
         <button className={classes.uploadButton} onClick={handleUpload}>
           <RiUploadCloudFill /> &nbsp; Upload
         </button>
@@ -85,17 +116,45 @@ const ImageSelectorModal = ({
               <Image
                 src={wallpaper.url}
                 alt='Background'
-                width={100}
-                height={100}
+                width={1920}
+                height={1080}
+                quality={100}
                 className={classes.image}
                 onClick={() => {
                   onSelectImage(wallpaper.url);
                   onClose();
                 }}
+                priority
               />
+
               <button
                 className={classes.deleteButton}
-                onClick={() => handleDelete(wallpaper.id)}
+                onClick={() => {
+                  toast.custom(
+                    t => (
+                      <div className={classes.confirmToast}>
+                        <span>Delete this wallpaper?</span>
+                        <div className={classes.toastActions}>
+                          <button
+                            onClick={() => {
+                              handleDelete(wallpaper.id);
+                              toast.dismiss(t.id);
+                            }}
+                          >
+                            Yes
+                          </button>
+                          <button onClick={() => toast.dismiss(t.id)}>
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ),
+                    {
+                      duration: 30000,
+                      position: 'top-center',
+                    },
+                  );
+                }}
               >
                 <FaRegTrashAlt style={{ color: 'red' }} />
               </button>
