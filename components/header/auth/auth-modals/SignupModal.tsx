@@ -1,6 +1,6 @@
 import { useState, useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { IoCloseCircleOutline } from 'react-icons/io5';
+import { IoMdClose } from 'react-icons/io';
 import classes from './auth-modals.module.css';
 import { LoginButton } from '../auth-buttons/AuthButtons';
 import { registerUser } from '@/lib/actions/auth';
@@ -110,7 +110,7 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
         </span>
 
         <button className={classes.closeButton} onClick={onClose}>
-          <IoCloseCircleOutline />
+          <IoMdClose />
         </button>
       </div>
     </div>
