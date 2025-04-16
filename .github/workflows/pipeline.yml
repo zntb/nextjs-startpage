@@ -32,8 +32,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      #   - name: Run tests
-      #     run: npm test
+      - name: Run tests
+        run: npm test
 
       - name: Check Vercel Deployment Status
         uses: UnlyEd/github-action-await-vercel@v2.0
