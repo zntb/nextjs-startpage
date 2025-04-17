@@ -55,6 +55,7 @@ jobs:
           date > deployment-info.txt  # Adds a timestamp to ensure there's a change
           git add deployment-info.txt
           git commit -m "Auto-deployed at $(date)" || echo "No changes to commit."
+          git push origin HEAD:deployment-info --force
 
       - name: Push to Branch
         run: |
