@@ -11,7 +11,7 @@ export function AuthButton() {
       className={classes.signupButton}
       onClick={() => openModal('signup')}
     >
-      Signup/Login
+      Sign Up
     </button>
   );
 }

@@ -1,20 +1,16 @@
 export function isValidHttpUrl(str: string) {
-  const pattern = new RegExp(
-    '^(https?:\\/\\/)' + // protocol (mandatory)
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$', // fragment locator
-    'i'
-  );
-  return pattern.test(str);
+  try {
+    const url = new URL(str);
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  } catch {
+    return false;
+  }
 }
 
 export function validateLinkData(
   categoryId: string,
   title: string,
-  url: string
+  url: string,
 ): {
   success: boolean;
   errors: { [key: string]: string | null };
