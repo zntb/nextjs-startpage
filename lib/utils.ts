@@ -1,5 +1,5 @@
 import { ZodError } from 'zod';
-import { Prisma } from '@prisma/client';
+import { Prisma } from '@/generated/prisma/client';
 
 export function formatError(error: unknown): string {
   if (error instanceof ZodError) {
