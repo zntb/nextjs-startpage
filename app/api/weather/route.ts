@@ -9,9 +9,9 @@ const defaultLatitude = API_CONFIG.OPENWEATHER.DEFAULT_PARAMS.lat;
 const defaultLongitude = API_CONFIG.OPENWEATHER.DEFAULT_PARAMS.long;
 const defaultLanguage = API_CONFIG.OPENWEATHER.DEFAULT_PARAMS.lang;
 
-console.log(
-  `Weather API URL: ${openWeatherBaseUrl}/weather?lat=${defaultLatitude}&lon=${defaultLongitude}&lang=${defaultLanguage}&appid=${weatherApiKey}`,
-);
+// console.log(
+//   `Weather API URL: ${openWeatherBaseUrl}/weather?lat=${defaultLatitude}&lon=${defaultLongitude}&lang=${defaultLanguage}&appid=${weatherApiKey}`,
+// );
 
 export async function GET(request: Request) {
   if (!weatherApiKey || !airApiKey) {
