@@ -1,43 +1,57 @@
+/* ═══════════════════════════════════════════
+   IMAGE SELECTOR MODAL — Glass
+   ═══════════════════════════════════════════ */
+
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  animation: fadeIn 200ms ease-out both;
 }
 
 .modalContent {
   position: relative;
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  width: 80%;
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  width: 90%;
   max-width: 500px;
   text-align: center;
+  box-shadow: var(--shadow-lg);
+  animation: scaleIn 300ms var(--ease-out-expo) both;
+  color: var(--text-primary);
 }
 
 .modalContent h2 {
-  margin: 10px 0 20px 0;
-  color: #252525;
-  font-weight: bold;
-  font-size: 1.15rem;
+  margin: var(--space-sm) 0 var(--space-lg);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
 }
 
 .fileInput {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 0.5rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-sm);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
 }
 
 .imageGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 10px;
+  gap: var(--space-sm);
 }
 
 .imageItem {
@@ -47,10 +61,9 @@
 
 .imageItem:first-child {
   margin: auto;
-  aspect-ratio: 1;
   width: 50%;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #cacaca;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .image {
@@ -59,108 +72,129 @@
   object-fit: cover;
   border: 2px solid transparent;
   overflow: hidden;
-  border-radius: 8px 8px 0 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
   cursor: pointer;
-  transition: border-color 0.3s ease;
+  transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
 .image:hover {
-  border-color: #30cfd0;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  transform: scale(1.02);
 }
 
 .uploadButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 20px;
-  margin: auto;
-  margin-bottom: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  margin: 0 auto var(--space-sm);
   width: 50%;
-  border: 2px solid #30cfd0;
-  border-radius: 8px 8px 0 0;
-  height: auto;
-  background-color: transparent;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  color: var(--text-accent);
+  font-size: 0.85rem;
+  transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
 .uploadButton:hover {
-  background-color: #30cfd0;
+  background: rgba(34, 211, 238, 0.15);
+  box-shadow: var(--shadow-glow);
 }
 
 .closeButton {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 10px;
-  background-color: #30cfd0;
-  color: #000000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  padding: 0.35rem 0.7rem;
+  background: var(--glass-bg-light);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
 .closeButton:hover {
-  background-color: #28b6b6;
+  background: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.3);
+  color: var(--text-accent);
 }
 
 .deleteButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 20px;
+  padding: 0.4rem 1rem;
   width: 100%;
-  border: 2px solid #00000021;
+  background: transparent;
+  border: 1px solid var(--glass-border);
   border-top: none;
-  border-radius: 0 0 8px 8px;
-  height: auto;
-  background-color: transparent;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
 .deleteButton:hover {
-  background-color: #ffeeee;
-  border: 1px solid #ff0000;
+  background: rgba(248, 113, 113, 0.12);
+  border-color: var(--danger);
+  color: var(--danger);
 }
 
+/* ── Toast Confirmation ── */
 .confirmToast {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(16px);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-md);
+  color: var(--text-primary);
 }
 
 .toastActions button {
-  margin-left: 0.5rem;
-  padding: 0.3rem 0.6rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  margin-left: var(--space-sm);
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  transition: all var(--duration-fast);
 }
 
 .toastActions button:first-of-type {
-  background-color: red;
-  color: white;
+  background: rgba(248, 113, 113, 0.2);
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.toastActions button:first-of-type:hover {
+  background: rgba(248, 113, 113, 0.35);
 }
 
 .toastActions button:last-of-type {
-  background-color: #ccc;
+  background: var(--glass-bg-light);
+  color: var(--text-secondary);
 }
 
+.toastActions button:last-of-type:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Preview ── */
 .previewContainer {
-  margin: 0.3rem 0 0.7rem 0;
+  margin: var(--space-sm) 0 var(--space-md);
   display: flex;
   justify-content: center;
 }
 
 .previewImage {
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   object-fit: cover;
-  border: 1px solid #ccc;
+  border: 1px solid var(--glass-border);
 }

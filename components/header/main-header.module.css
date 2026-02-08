@@ -1,77 +1,96 @@
+/* ═══════════════════════════════════════════
+   HEADER — Glassmorphism Nav
+   ═══════════════════════════════════════════ */
+
 .header {
-  align-items: center;
-  padding: 0 60px;
-  background-color: rgba(4, 27, 41, 0.5);
   position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-xl);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  border-bottom: 1px solid var(--glass-border);
+  animation: slideDown 500ms var(--ease-out-expo) both;
+  z-index: 100;
 }
 
 .header ul {
-  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
+  gap: var(--space-xs);
 }
 
 .header li {
-  margin: 0 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  letter-spacing: 1px;
-  width: 10rem;
-  padding: 0;
-  color: rgb(223, 224, 203);
-  border-radius: 3px;
-  background-color: rgba(220, 227, 142, 0);
-  transition: 0.3s ease-in-out;
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
 .header li a {
-  text-align: center;
+  display: block;
   width: 100%;
-  padding: 1rem 1.4rem;
+  padding: 0.85rem 1.6rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: inherit;
+  color: var(--text-secondary);
   text-decoration: none;
+  text-align: center;
+  transition: color var(--duration-fast) var(--ease-out-expo);
 }
 
 .header li:hover {
-  background-color: rgba(89, 125, 179, 0.76);
-  color: rgb(220, 227, 142);
+  background: var(--glass-bg-light);
 }
 
+.header li:hover a {
+  color: var(--text-accent);
+}
+
+/* ── Nav Container ── */
 .nav {
   width: 100%;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
+  margin: 0 auto;
+  transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
+/* ── Checkbox Settings Panel ── */
 .checkboxContainer {
   position: absolute;
-  top: 0.1rem;
-  right: 0.1rem;
-  background-color: rgba(4, 27, 41, 0.8);
-  border-radius: 5px;
+  top: var(--space-xs);
+  right: var(--space-sm);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
   justify-content: center;
-  gap: 8px;
-  transition: all 0.3s ease-in-out;
+  gap: 6px;
+  padding: var(--space-sm);
   opacity: 0;
-  pointer-events: auto;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
 .nav:hover .checkboxContainer {
   opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .checkboxItem {
@@ -80,44 +99,55 @@
 }
 
 .checkbox {
-  font-size: 18px;
-  color: #fff;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
   cursor: pointer;
   user-select: none;
   display: flex;
   align-items: center;
-  transition: all 0.3s ease-in-out;
+  letter-spacing: 0.5px;
+  transition: color var(--duration-fast);
+}
+
+.checkbox:hover {
+  color: var(--text-primary);
 }
 
 .checkmark {
   appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #30cfd0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--accent);
   border-radius: 5px;
   background-color: transparent;
   display: inline-block;
   position: relative;
-  margin-right: 10px;
+  margin-right: 8px;
   cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
 .checkmark::before {
   content: '';
-  background-color: #30cfd0;
+  background-color: var(--accent);
   display: block;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 3px;
-  transition: all 0.3s ease-in-out;
+  transition: transform var(--duration-normal) var(--ease-spring);
 }
 
 .checkmark:checked::before {
   transform: translate(-50%, -50%) scale(1);
+}
+
+.checkmark:checked {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .checked {
@@ -125,86 +155,83 @@
 }
 
 .checkboxContainer hr {
-  text-align: center;
-  margin: auto;
   width: 80%;
   height: 1px;
-  border-color: rgba(229, 231, 235, 0.534);
+  margin: 0 auto;
+  border: none;
+  background: var(--glass-border);
 }
 
+/* ── Sign Out Button ── */
 .signOutButton {
-  background: #d8d8d82d;
-  color: white;
-  padding: 1rem 1.4rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
+  background: var(--glass-bg-light);
+  color: var(--text-secondary);
+  padding: 0.85rem 1.6rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   width: 100%;
-  transition: all 0.3s ease-in-out;
+  transition: all var(--duration-normal) var(--ease-out-expo);
 }
+
+.signOutButton:hover {
+  color: var(--text-accent);
+  border-color: var(--glass-border-hover);
+  background: rgba(34, 211, 238, 0.08);
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE
+   ═══════════════════════════════════════════ */
 
 @media (max-width: 48rem) {
   .header {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    padding: 0 var(--space-sm);
   }
 
   .header ul {
-    padding: 0.1rem 0 !important;
+    width: 100%;
+    padding: var(--space-xs) 0;
+    gap: 0;
   }
 
   .header li {
-    letter-spacing: 0;
-    font-size: 0.7rem;
-    margin: 0;
-    padding: 0.9rem;
-    width: 80%;
+    flex: 1;
   }
 
-  .header li:last-child {
-    margin-right: 2.2rem;
-    background-color: #d8d8d82d;
-  }
-
-  .header li:last-child:hover {
-    background-color: #d1d1d13f;
-  }
-
-  .header ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  .header ul li a {
-    padding: 0;
+  .header li a {
+    padding: 0.7rem 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.8px;
   }
 
   .nav {
-    margin-right: 1rem;
+    margin: 0;
   }
 
   .checkboxContainer {
-    margin: 0 0.2rem 0 0;
-    padding: 0;
+    top: 0;
+    right: 0;
+    padding: var(--space-xs);
+    border-radius: var(--radius-sm);
   }
 
   .checkbox {
-    font-size: 10px;
+    font-size: 0.6rem;
   }
 
   .checkmark {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
   }
 
   .signOutButton {
-    padding: 0;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.65rem;
     background: none;
   }
 }

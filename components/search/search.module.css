@@ -1,124 +1,137 @@
+/* ═══════════════════════════════════════════
+   SEARCH BAR — Floating Glass
+   ═══════════════════════════════════════════ */
+
 .container {
   display: block;
   margin: 0 auto;
   padding: 0;
-  width: 35rem;
-  height: 2.5rem;
-  background-color: lightgrey;
-  border: none;
-  border-radius: 7px;
+  width: 100%;
+  max-width: 36rem;
+  height: 2.75rem;
 }
 
 .search {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 100%;
-  border: none;
-  border-radius: 7px;
-  background-color: transparent;
-  box-shadow: 0 0 1px rgb(193, 217, 191), 0 0 0 2.5px rgba(56, 119, 130, 0.922);
-  font-size: 1.2rem;
-  scale: 1;
-  transition: all 0.4s ease-in-out;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
 .search:hover {
-  background-color: rgb(223, 249, 255);
-  box-shadow: 0 0 1px rgb(193, 217, 191), 0 0 0 5px rgba(174, 222, 241, 0.922);
-  scale: 1.01;
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+.search:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md), 0 0 0 3px var(--accent-glow);
+  background: var(--glass-bg-strong);
+  transform: translateY(-1px);
 }
 
 .searchInput {
   width: 100%;
   height: 100%;
-  padding: 0 0 0 0.3rem;
-  background-color: transparent;
-  font: inherit;
-  color: black;
-  cursor: pointer;
-  outline: none;
+  padding: 0 var(--space-md);
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-primary);
   border: none;
+  outline: none;
+  cursor: text;
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 .buttons {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  margin: 0;
-  padding: 0;
-  width: 4.3rem;
-  height: 100%;
-  transition: all 0.4s ease-in-out;
-}
-
-.search:hover .buttons Image {
-  scale: 1.01;
+  gap: var(--space-xs);
+  padding-right: var(--space-sm);
 }
 
 .closeButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  padding: 0 0.3rem 0 0;
   width: 2rem;
   height: 2rem;
   border: none;
-  border-radius: 7px;
-  background-color: transparent;
-  font-size: 1.2rem;
-  color: black;
-  opacity: 0.3;
-  transition: 0.4s ease-in-out;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  opacity: 0.4;
+  transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
 .closeButton:hover {
-  opacity: 1;
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.closeButton img {
+  filter: invert(1);
 }
 
 .searchButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  margin-right: 0.2rem;
-  padding: 0;
   width: 2.2rem;
-  height: 2.3rem;
+  height: 2.2rem;
   border: none;
-  border-radius: 7px;
-  background-color: transparent;
-  font-size: 1.2rem;
-  color: black;
-  opacity: 0.3;
-
-  transition: 0.4s ease-in-out;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  opacity: 0.35;
+  transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
-.search:hover .searchButton {
-  background-color: rgb(208, 234, 240);
-  border-radius: 0 7px 7px 0;
+.searchButton img {
+  filter: invert(1);
+}
+
+.search:hover .searchButton,
+.search:focus-within .searchButton {
+  opacity: 0.8;
+  background: rgba(34, 211, 238, 0.1);
+  border-radius: var(--radius-sm);
+}
+
+.search:hover .searchButton:hover,
+.search:focus-within .searchButton:hover {
   opacity: 1;
+  background: rgba(34, 211, 238, 0.2);
 }
 
+/* ── Tablet ── */
 @media (max-width: 1100px) {
   .container {
-    display: block;
-    position: static;
-    margin: 0 10rem;
-    width: 100%;
-    max-width: 25rem;
+    max-width: 28rem;
+    margin: 0 auto;
   }
 }
 
+/* ── Mobile ── */
 @media (max-width: 48rem) {
   .container {
-    display: block;
-    position: static;
+    max-width: 100%;
     margin: 0;
+  }
+
+  .search {
+    border-radius: var(--radius-md);
   }
 }

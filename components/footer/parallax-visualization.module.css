@@ -1,12 +1,16 @@
-/* Waves */
+/* ═══════════════════════════════════════════
+   WAVES — Parallax Animation
+   ═══════════════════════════════════════════ */
+
 .waves {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 50vh;
-  min-height: 100px;
-  max-height: 150px;
+  min-height: 80px;
+  max-height: 130px;
   z-index: -1;
+  opacity: 0.6;
 }
 
 .parallax > use {
@@ -37,8 +41,14 @@
   0% {
     transform: translate3d(-90px, 0, 0);
   }
-
   100% {
     transform: translate3d(85px, 0, 0);
+  }
+}
+
+@media (max-width: 48rem) {
+  .waves {
+    max-height: 80px;
+    opacity: 0.4;
   }
 }

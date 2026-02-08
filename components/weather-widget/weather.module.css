@@ -14,8 +14,8 @@
   width: 250px;
   height: 130px;
   border-radius: 25px;
-  background: rgb(173, 202, 209);
-  color: black;
+  background: rgb(15, 23, 42);
+  color: rgb(218, 244, 255);
   z-index: 2;
   transition: 0.4s ease-in-out;
 }
@@ -59,13 +59,14 @@
   width: 240px;
   height: 130px;
   border-radius: 35px;
-  background: rgb(185, 213, 219);
+  background: rgb(18, 30, 50);
   z-index: -1;
   transition: 0.4s ease-in-out;
 }
 
 .card:hover {
-  background-color: #ffe87c;
+  background-color: rgba(34, 211, 238, 0.12);
+  color: rgb(247, 253, 255);
   cursor: pointer;
 }
 
@@ -83,7 +84,7 @@
   display: flex;
   flex-direction: row;
   position: relative;
-  color: black;
+  color: rgb(229, 238, 236);
   left: 1.5em;
   top: 0.3em;
   gap: 4em;
@@ -108,7 +109,7 @@
   flex-direction: row;
   position: absolute;
   text-align: center;
-  color: black;
+  color: rgb(229, 238, 236);
   left: 3.1em;
   top: 1em;
   margin-top: 0.7em;
@@ -116,14 +117,15 @@
   transition: 0.4s ease-in-out;
 }
 
-.aqi, .realFeel, .pressure {
+.aqi,
+.realFeel,
+.pressure {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
-
 
 .aqi {
   margin-right: 3.25em;
@@ -132,7 +134,6 @@
 .realFeel {
   margin-right: 1.8em;
 }
-
 
 .description {
   position: absolute;
@@ -147,7 +148,7 @@
   font-size: 1.24em;
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
-  background: rgb(37, 150, 141);
+  background: rgb(46, 153, 172);
   transition: 0.4s ease-in-out;
 }
 

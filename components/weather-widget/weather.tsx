@@ -7,6 +7,15 @@ import { Air, Aqi, Humidity, Pressure, RealFeel } from './weather-icons';
 import classes from './weather.module.css';
 import { CONFIG, weatherInitialData } from '@/lib/weather-config';
 
+async function getPosition(): Promise<GeolocationPosition> {
+  return new Promise((resolve, reject) => {
+    if (!CONFIG.trackLocation || !navigator.geolocation) {
+      reject('Geolocation not available');
+    }
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+}
+
 function WeatherClient() {
   const [weather, setWeather] = useState<WeatherData>(weatherInitialData);
 
@@ -55,15 +64,6 @@ function WeatherClient() {
 
     fetchData();
   }, []);
-
-  async function getPosition(): Promise<GeolocationPosition> {
-    return new Promise((resolve, reject) => {
-      if (!CONFIG.trackLocation || !navigator.geolocation) {
-        reject('Geolocation not available');
-      }
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
-  }
 
   return (
     <div className={classes.weatherWidget}>
