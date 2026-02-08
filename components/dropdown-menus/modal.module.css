@@ -1,47 +1,51 @@
+/* ═══════════════════════════════════════════
+   DROPDOWN MODAL — Glass Overlay
+   ═══════════════════════════════════════════ */
+
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
+  animation: fadeIn 200ms ease-out both;
 }
 
 .modalContent {
   width: 25rem;
-  background: rgb(204, 220, 228);
-  padding: 20px;
-  border-radius: 4px;
+  max-width: 90vw;
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
   position: relative;
   z-index: 999;
+  box-shadow: var(--shadow-lg);
+  animation: scaleIn 300ms var(--ease-out-expo) both;
+  color: var(--text-primary);
 }
-
-/* .closeButton {
-  position: absolute;
-  top: 2px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-} */
 
 .closeButton {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 10px;
-  background-color: #30cfd0;
-  color: #000000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  padding: 0.35rem 0.7rem;
+  background: var(--glass-bg-light);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
 .closeButton:hover {
-  background-color: #28b6b6;
+  background: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.3);
+  color: var(--text-accent);
 }

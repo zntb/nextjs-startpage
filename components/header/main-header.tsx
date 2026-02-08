@@ -39,15 +39,10 @@ function MainHeader() {
 
   const user = useCurrentUser();
 
-  const fetchWallpapers = async () => {
-    const res = await fetch('/api/wallpapers');
-    const data = await res.json();
-    setWallpapers(data);
-  };
-
   useEffect(() => {
     const savedImage = localStorage.getItem('selectedBackgroundImage');
     if (savedImage) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setBackgroundImage(savedImage);
     }
   }, []);
@@ -61,6 +56,11 @@ function MainHeader() {
 
   useEffect(() => {
     if (isBackgroundModalVisible) {
+      const fetchWallpapers = async () => {
+        const res = await fetch('/api/wallpapers');
+        const data = await res.json();
+        setWallpapers(data);
+      };
       fetchWallpapers();
     }
   }, [isBackgroundModalVisible]);

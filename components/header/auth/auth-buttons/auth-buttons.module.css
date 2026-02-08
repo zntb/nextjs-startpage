@@ -1,32 +1,47 @@
+/* ═══════════════════════════════════════════
+   AUTH BUTTONS — Glass Style
+   ═══════════════════════════════════════════ */
+
 .signupButton {
-  background: #d8d8d82d;
-  color: white;
-  padding: 1rem 1.4rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
+  background: var(--glass-bg-light);
+  color: var(--text-secondary);
+  padding: 0.85rem 1.6rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   width: 100%;
-  transition: all 0.3s ease-in-out;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.signupButton:hover {
+  color: var(--text-accent);
+  border-color: var(--glass-border-hover);
+  background: rgba(34, 211, 238, 0.08);
 }
 
 .authButtons {
-  background: rgba(0, 0, 0, 0.055);
-  color: #707070;
-  padding: 0.7rem 1.4rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
+  background: var(--glass-bg-light);
+  color: var(--text-secondary);
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
   width: 100%;
-  transition: all 0.3s ease-in-out;
+  font-size: 0.85rem;
+  transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
 .authButtons:hover {
-  background: rgba(0, 0, 0, 0.116);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--glass-border-hover);
 }
 
 @media (max-width: 48rem) {
   .signupButton {
-    padding: 0;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.65rem;
     background: none;
   }
 }

@@ -1,49 +1,83 @@
+/* ═══════════════════════════════════════════
+   EXCHANGE WIDGET — Glass Card
+   ═══════════════════════════════════════════ */
+
 .container {
   display: none;
-  background-color: #083344; /* bg-cyan-950 */
-  opacity: 0.9;
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
   width: 16rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: var(--shadow-md);
+  animation: fadeInUp 600ms var(--ease-out-expo) both;
+  animation-delay: 300ms;
 }
 
 .title {
   text-align: center;
-  font-weight: bold;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-sm);
 }
 
 .label {
   display: block;
   font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-xs);
 }
 
 .input {
   width: 100%;
-  font-size: 0.9rem !important;
-  color: black;
-  padding: 0.3rem;
-  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: var(--glass-bg-light);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.5rem;
+  outline: none;
+  transition: border-color var(--duration-fast) var(--ease-out-expo);
+}
+
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.input option {
+  background: #0f172a;
+  color: var(--text-primary);
 }
 
 .inputContainer {
-  margin-top: 0.75rem;
+  margin-top: 0.6rem;
 }
 
 .result {
-  margin-top: 0.75rem;
+  margin-top: var(--space-md);
   text-align: center;
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-family: var(--font-geist-mono), monospace;
+  color: var(--text-accent);
+  letter-spacing: -0.5px;
 }
 
 .date {
   text-align: center;
-  margin-top: 0.65rem;
-  font-size: 0.65rem;
-  margin-top: 0.45rem;
+  font-size: 0.6rem;
+  margin-top: var(--space-sm);
+  color: var(--text-muted);
 }
 
 @media (min-width: 53rem) {

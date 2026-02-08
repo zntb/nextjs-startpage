@@ -1,41 +1,60 @@
-/* Footer */
+/* ═══════════════════════════════════════════
+   FOOTER — Modern Glass
+   ═══════════════════════════════════════════ */
+
 .footer {
   position: absolute;
-  width: 100%;
-  align-items: center;
   bottom: 0;
+  width: 100%;
+  animation: fadeIn 800ms var(--ease-out-expo) both;
+  animation-delay: 400ms;
 }
 
 .footer ul {
-  margin-bottom: 5px;
-  padding-bottom: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   list-style: none;
+  margin: 0;
+  padding: var(--space-sm) 0;
+  gap: 0;
 }
 
 .footer li a {
-  font-family: 'Quicksand', sans-serif;
-  padding: 0 17px;
-  color: rgb(220, 227, 142);
-  border-top: rgba(220, 227, 142, 0);
-  border-bottom: rgba(220, 227, 142, 0);
-  transition: 0.3s ease-in-out;
+  padding: 0.25rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: var(--text-muted);
+  border-bottom: 1px solid transparent;
+  transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
 .footer li a:hover {
-  border-top: 1px solid rgba(225, 245, 47, 0.8);
-  border-bottom: 1px solid rgba(225, 245, 47, 0.8);
-  color: rgb(225, 245, 47);
+  color: var(--text-accent);
+  border-bottom-color: var(--accent);
 }
 
 .copyright {
-  padding-left: 13px;
+  padding-left: var(--space-md);
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
 
 @media (max-width: 48rem) {
   .footer {
-    display: none;
+    position: relative;
+    padding-bottom: var(--space-md);
+  }
+
+  .footer ul {
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+  }
+
+  .footer li a {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
   }
 }

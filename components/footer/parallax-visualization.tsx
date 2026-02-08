@@ -15,10 +15,10 @@ function ParallaxVisualization() {
         />
       </defs>
       <g className={classes.parallax}>
-        <use href="#gentle-wave" x="48" y="0" fill="rgba(55, 90, 95, 0.7)" />
-        <use href="#gentle-wave" x="48" y="3" fill="rgba(55, 90, 95, 0.5)" />
-        <use href="#gentle-wave" x="48" y="5" fill="rgba(77, 125, 132, 0.3)" />
-        <use href="#gentle-wave" x="48" y="7" fill="rgba(77, 125, 132, 0.7)" />
+        <use href="#gentle-wave" x="48" y="0" fill="rgba(15, 23, 42, 0.7)" />
+        <use href="#gentle-wave" x="48" y="3" fill="rgba(34, 211, 238, 0.12)" />
+        <use href="#gentle-wave" x="48" y="5" fill="rgba(15, 23, 42, 0.4)" />
+        <use href="#gentle-wave" x="48" y="7" fill="rgba(15, 23, 42, 0.65)" />
       </g>
     </svg>
   );
