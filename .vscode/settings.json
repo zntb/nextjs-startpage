@@ -28,5 +28,6 @@
     "turbopack",
     "VERCEL",
     "waqi"
-  ]
+  ],
+  "snyk.advanced.autoSelectOrganization": true
 }
